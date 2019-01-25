@@ -41,7 +41,7 @@ class TaskEdit extends Component {
                             <div className="control">
                                 <button type="button" className="button is-warning" onClick={ () => this.updateTask(this.state.id, this.state.task) }>Update</button>
                                 &nbsp;
-                                <button type="button" className="button is-secondary" onClick={this.editMode}>Cancel</button>
+                                <button type="button" className="button is-secondary" onClick={this.toggleEdit}>Cancel</button>
                             </div>
                         </div>
                     </div>

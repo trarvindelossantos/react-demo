@@ -69,12 +69,15 @@ export default class App extends Component {
 	}
 
 	toggleEdit = (editable) => {
+		//toggle edit mode
+		//if not editable null state
 		if (!editable) {
 			this.setState({
 				for_edit: null,
 				for_edit_task: ""
 			});
 		}
+		//set to state to edit mode
 		this.setState({
 			on_edit: editable
 		});
@@ -91,15 +94,15 @@ export default class App extends Component {
 			return true
 		});
 		
-		this.setState(myTask => ({
+		this.setState({
 			for_edit: myTask.id,
-			for_edit_task: myTask.task
-		}));
+			for_edit_task: myTask.task,
+		});
+		console.log(this.state)
 		
 	}
 
 	updateTask = (id, updated_task) => {
-		console.log(updated_task);
 		this.tasks.map(task => {
 			if (task.id === id){
 				task.task = updated_task
@@ -121,11 +124,11 @@ export default class App extends Component {
 				
 				<Header />
 				<div className="container">
-					{ this.state.on_edit ? <TaskEdit updateTask={this.updateTask} toggleEdit={this.toggleEdit} for_edit={this.state.for_edit} for_edit_task={this.state.for_edit_task} /> : <TaskCreate createTask={this.createTask} />}
+					{ this.state.on_edit ? <TaskEdit updateTask={this.updateTask}  toggleEdit={this.toggleEdit} for_edit={this.state.for_edit} for_edit_task={this.state.for_edit_task} /> : <TaskCreate createTask={this.createTask} />}
 					
 				</div>
 				<div className="container">
-					<TaskList task_list={this.tasks} updateTaskStatus={this.updateTaskStatus} deleteTask={this.deleteTask} on_edit={this.state.on_edit} editMode={this.editMode} getTask={this.getTask}/>
+					<TaskList task_list={this.tasks} updateTaskStatus={this.updateTaskStatus} deleteTask={this.deleteTask} on_edit={this.state.on_edit} toggleEdit={this.toggleEdit} getTask={this.getTask}/>
 				</div> 
 
 			</div>

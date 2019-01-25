@@ -10,7 +10,6 @@ class TaskList extends Component {
             tasks: props.task_list,
             on_edit: false
         };
-        console.log(props)
         
     }
 
@@ -31,6 +30,9 @@ class TaskList extends Component {
             id: task_id
         });
         this.props.updateTaskStatus(task_id);
+        this.setState({
+            on_edit: true
+        });
     }
 
     deleteTask = (task_id) => {
@@ -40,17 +42,14 @@ class TaskList extends Component {
         this.props.deleteTask(task_id);
     }
 
-    editMode = (task_id) => {
-        console.log(task_id)
-        this.props.getTask(task_id);
+    toggleEdit = (task_id) => {
         this.props.toggleEdit(true);
-        this.setState({
-            on_edit: true
-        });
+        this.props.getTask(task_id);
+        
+        
     }
 
     render() {
-        //let pendingTasks = this.countTasks();
         return(
             <div className="column">
                 <h3>Pending Tasks: </h3>
@@ -80,7 +79,7 @@ class TaskList extends Component {
                                             }
                                             
                                             &nbsp;
-                                            <button onClick={ () => this.editMode(task.id) } type="button" className="button is-small is-warning">Edit</button>
+                                            {!task.status ? (<button onClick={ () => this.toggleEdit(task.id) } type="button" className="button is-small is-warning">Edit</button>) : ""}
                                             &nbsp;
                                             {/* <button onClick={ () => this.deleteTask(task.id) } type="button" className="button is-small is-danger">Delete</button> */}
                                         </td>
